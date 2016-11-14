@@ -1,6 +1,6 @@
 # vue-vuex-2048
 
-> 2048 game using Vue and Vuex
+> 2048 with Vue and Vuex
 
 ## Build Setup
 
@@ -13,6 +13,12 @@ npm run dev
 
 # build for production with minification
 npm run build
+
+# run unit tests
+npm run unit
+
+# run all tests
+npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

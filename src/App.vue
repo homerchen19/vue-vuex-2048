@@ -1,28 +1,35 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
-  </div>
+<template lang='pug'>
+  div#app
+    board
 </template>
 
 <script>
-import Hello from './components/Hello';
+import Board from './components/Board';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    Board,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #faf8ef;
+    color: #776e65;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+  }
+
+  body {
+    margin: 80px 0;
+  }
+
+  #app {
+    width: 500px;
+    margin: 0 auto;
+  }
 </style>
