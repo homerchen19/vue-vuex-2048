@@ -50,7 +50,12 @@ module.exports = {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue',
+        options: {
+          loaders: {
+            scss: 'style!css!sass'
+          }
+        }
       },
       {
         test: /\.js$/,
