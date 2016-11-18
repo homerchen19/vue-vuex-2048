@@ -48,8 +48,8 @@
 
   .tile {
     position: absolute;
-    width: 108px;
-    height: 108px;
+    width: 110px;
+    height: 110px;
     margin: 6px;
     line-height: 90px;
     display: inline-block;

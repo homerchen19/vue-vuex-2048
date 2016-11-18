@@ -1,5 +1,5 @@
 class Tile {
-  constructor(value, row, column) {
+  constructor(value, row, column, id) {
     this.value = value || 0;
     this.row = row || -1;
     this.column = column || -1;
@@ -7,8 +7,7 @@ class Tile {
     this.oldColumn = -1;
     this.markForDeletion = false;
     this.mergedInto = null;
-    this.id = Tile.id++;
-    Tile.id = 0;
+    this.id = id;
   }
 
   move(row, column) {

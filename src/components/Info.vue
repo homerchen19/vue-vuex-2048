@@ -49,7 +49,7 @@ export default {
     display: inline-block;
     background: #bbada0;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 0px;
     padding: 15px 25px;
     font-size: 25px;
     height: 30px;
@@ -58,6 +58,10 @@ export default {
     border-radius: 3px;
     color: #fff;
     text-align: center;
+
+    &:first-child {
+      margin-right: 10px;
+    }
 
     &:after {
       position: absolute;
@@ -106,7 +110,6 @@ export default {
       float: right;
       display: inline-block;
       height: 40px;
-      margin-right: 10px;
       padding: 0 20px;
       line-height: 42px;
       background: #9d846b;

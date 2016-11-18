@@ -18,10 +18,13 @@ class Board {
     this.tiles = [];
     this.cells = [];
     this.size = 4;
-    for (let i = 0; i < this.size; i++) {
-      this.cells[i] = [this.addTile(), this.addTile(), this.addTile(), this.addTile()];
+    for (let i = 0; i < (this.size * this.size);) {
+      this.cells[(i / 4)] = [this.addTile(0, 0, 0, i), this.addTile(0, 0, 0, i + 1), this.addTile(0, 0, 0, i + 2), this.addTile(0, 0, 0, i + 3)]; // eslint-disable-line
+      i += 4;
     }
-    this.addRandomTile();
+    for (let j = 0; j < 2; j++) {
+      this.addRandomTile();
+    }
     this.setPositions();
     this.won = false;
     this.fourProbability = 0.1;
@@ -29,11 +32,26 @@ class Board {
     this.deltaY = [0, -1, 0, 1];
   }
 
-  addTile() {
-    const res = new Tile();
-    Tile.apply(res, arguments);
+  addTile(value, row, col, id) {
+    const res = new Tile(value, row, col, id);
     this.tiles.push(res);
     return res;
+  }
+
+  addRandomTile() {
+    let emptyCells = [];
+    for (let row = 0; row < this.size; row++) {
+      for (let col = 0; col < this.size; col++) {
+        if (this.cells[row][col].value === 0) {
+          emptyCells.push({ row, col });
+        }
+      }
+    }
+
+    const index = ~~(Math.random() * emptyCells.length);
+    const cell = emptyCells[index];
+    const newValue = Math.random() < this.fourProbability ? 4 : 2;
+    this.cells[cell.row][cell.col] = this.addTile(newValue, cell.row, cell.col, this.cells[cell.row][cell.col].id); // eslint-disable-line
   }
 
   moveLeft() {
@@ -73,22 +91,6 @@ class Board {
     });
   }
 
-  addRandomTile() {
-    let emptyCells = [];
-    for (let r = 0; r < this.size; r++) {
-      for (let c = 0; c < this.size; c++) {
-        if (this.cells[r][c].value === 0) {
-          emptyCells.push({ r, c });
-        }
-      }
-    }
-
-    const index = ~~(Math.random() * emptyCells.length);
-    const cell = emptyCells[index];
-    const newValue = Math.random() < Board.fourProbability ? 4 : 2;
-    this.cells[cell.r][cell.c] = this.addTile(newValue);
-  }
-
   move(direction) {
     this.learOldTiles();
     for (let i = 0; i < direction; ++i) {
@@ -117,13 +119,13 @@ class Board {
 
   hasLost() {
     let canMove = false;
-    for (let row = 0; row < Board.size; ++row) {
-      for (let column = 0; column < Board.size; ++column) {
+    for (let row = 0; row < this.size; ++row) {
+      for (let column = 0; column < this.size; ++column) {
         canMove |= (this.cells[row][column].value === 0);
         for (let dir = 0; dir < 4; ++dir) {
-          const newRow = row + Board.deltaX[dir];
-          const newColumn = column + Board.deltaY[dir];
-          if (newRow < 0 || newRow >= Board.size || newColumn < 0 || newColumn >= Board.size) {
+          const newRow = row + this.deltaX[dir];
+          const newColumn = column + this.deltaY[dir];
+          if (newRow < 0 || newRow >= this.size || newColumn < 0 || newColumn >= this.size) {
             continue;
           }
           canMove |= (this.cells[row][column].value === this.cells[newRow][newColumn].value);

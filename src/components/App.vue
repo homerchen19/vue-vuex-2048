@@ -79,9 +79,8 @@
   }
 
   .board {
-    margin-top: 20px;
     position: relative;
-    padding: 10px;
+    padding: 6px;
     cursor: default;
     background: #bbada0;
     border-radius: 6px;
