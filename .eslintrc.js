@@ -25,6 +25,13 @@ module.exports = {
       'vue': 'never'
     }],
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'prefer-const': 'off',
+    'no-plusplus': 'off',
+    'no-bitwise': 'off',
+    'no-param-reassign': 'off',
+    'arrow-parens': 'off',
+    'no-continue': 'off',
+    'prefer-rest-params': 'off'
   }
 }

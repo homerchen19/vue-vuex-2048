@@ -1,5 +1,5 @@
 <template lang='pug'>
-  section.board
+  section.info
     div.heading
       h1.title 2048
       div.scores-container
@@ -8,12 +8,11 @@
     div.sub-heading
       p.game-intro Join the numbers and get to the
         strong  2048 tile!
-      a.restart-button(v-on:click="init") New Game
+      a.restart-button New Game
 </template>
 
 <script>
 export default {
-  name: 'board',
   computed: {
     score() {
       return this.$store.state.score;
@@ -26,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
-  .board {
+  .info {
     position: relative;
     top: -20px;
   }
