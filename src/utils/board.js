@@ -92,7 +92,7 @@ class Board {
   }
 
   move(direction) {
-    this.learOldTiles();
+    this.clearOldTiles();
     for (let i = 0; i < direction; ++i) {
       this.cells = rotateLeft(this.cells);
     }

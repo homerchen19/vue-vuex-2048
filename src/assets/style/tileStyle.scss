@@ -13,7 +13,7 @@
 
     @if $fromRow == $toRow {
       .#{$name} {
-        top: 125px * $toRow + 5px;
+        top: 122px * $toRow + 6px;
       }
     } @else {
       .#{$name} {
@@ -24,10 +24,10 @@
 
       @keyframes #{$name} {
         from {
-          top: 125px * $fromRow + 5px;
+          top: 122px * $fromRow + 6px;
         }
         to {
-          top: 125px * $toRow + 5px;
+          top: 122px * $toRow + 6px;
         }
       }
     }
@@ -40,7 +40,7 @@
 
     @if $fromColumn == $toColumn {
       .#{$name} {
-        left: 125px * $toColumn + 5px;
+        left: 122px * $toColumn + 6px;
       }
     } @else {
       .#{$name} {
@@ -51,10 +51,10 @@
 
       @keyframes #{$name} {
         from {
-          left: 125px * $fromColumn + 5px;
+          left: 122px * $fromColumn + 6px;
         }
         to {
-          left: 125px * $toColumn + 5px;
+          left: 122px * $toColumn + 6px;
         }
       }
     }
