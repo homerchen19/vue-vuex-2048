@@ -22,22 +22,33 @@
       window.removeEventListener('keydown', this.handleKeyDown.bind(this)); // eslint-disable-line
     },
     computed: {
-      tiles() {
-        return this.$store.state.board.tiles.filter(tile => tile.value !== 0);
-      },
       board() {
         return this.$store.state.board;
+      },
+      score() {
+        return this.$store.state.score;
+      },
+      tiles() {
+        return this.board.tiles.filter(tile => tile.value !== 0);
       },
     },
     methods: {
       handleKeyDown(event) {
-        if (this.$store.state.board.hasWon()) {
+        if (this.board.hasWon()) {
           return;
         }
         if (event.keyCode >= 37 && event.keyCode <= 40) {
           event.preventDefault();
           const direction = event.keyCode - 37;
-          this.$store.state.board.move(direction);
+          this.board.move(direction);
+          console.log(`this.score: ${this.score}`);
+          console.log(`this.board.score: ${this.board.score}`);
+          if (this.board.score > this.score) {
+            this.$store.commit({
+              type: 'addScore',
+              amount: this.board.score,
+            });
+          }
         }
       },
     },

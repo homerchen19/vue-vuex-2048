@@ -8,6 +8,9 @@ const mutations = {
       state.board = new Board();
     });
   },
+  addScore(state, payload) {
+    state.score = payload.amount;
+  },
 };
 
 export default mutations;

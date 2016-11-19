@@ -30,6 +30,7 @@ class Board {
     this.fourProbability = 0.1;
     this.deltaX = [-1, 0, 1, 0];
     this.deltaY = [0, -1, 0, 1];
+    this.score = 0;
   }
 
   addTile(value, row, col, id) {
@@ -68,6 +69,7 @@ class Board {
           let tile2 = currentRow.shift();
           tile2.mergedInto = targetTile;
           targetTile.value += tile2.value;
+          this.score += targetTile.value;
         }
         resultRow[target] = targetTile;
         this.won |= (targetTile.value === 2048);
