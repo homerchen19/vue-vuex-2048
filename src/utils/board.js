@@ -25,7 +25,7 @@ class Board {
     for (let j = 0; j < 2; j++) {
       this.addRandomTile();
     }
-    this.setPositions();
+    this.setPositions(true);
     this.won = false;
     this.fourProbability = 0.1;
     this.deltaX = [-1, 0, 1, 0];
@@ -63,7 +63,7 @@ class Board {
         let targetTile = currentRow.length ? currentRow.shift() : this.addTile(0, 0, 0, this.id++);
         if (currentRow.length > 0 && currentRow[0].value === targetTile.value) {
           let tile1 = targetTile;
-          targetTile = this.addTile(targetTile.value, targetTile.row, targetTile.column, this.id++);
+          targetTile = this.addTile(targetTile.value, targetTile.row, targetTile.column, targetTile.id); // eslint-disable-line
           tile1.mergedInto = targetTile;
           let tile2 = currentRow.shift();
           tile2.mergedInto = targetTile;
@@ -79,10 +79,13 @@ class Board {
     return hasChanged;
   }
 
-  setPositions() {
+  setPositions(init) {
     this.cells.forEach((row, rowIndex) => {
       row.forEach((tile, columnIndex) => {
-        tile.oldRow = tile.row;
+        if ((init || tile.oldRow === -1) && tile.new) {
+          tile.oldRow = -1;
+          tile.new = false;
+        } else tile.oldRow = tile.row;
         tile.oldColumn = tile.column;
         tile.row = rowIndex;
         tile.column = columnIndex;
@@ -103,7 +106,7 @@ class Board {
     if (hasChanged) {
       this.addRandomTile();
     }
-    this.setPositions();
+    this.setPositions(false);
     return this;
   }
 

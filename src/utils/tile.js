@@ -1,13 +1,14 @@
 class Tile {
   constructor(value, row, column, id) {
     this.value = value || 0;
-    this.row = row || -1;
-    this.column = column || -1;
+    this.row = row >= 0 ? row : -1;
+    this.column = column >= 0 ? column : -1;
     this.oldRow = -1;
     this.oldColumn = -1;
     this.markForDeletion = false;
     this.mergedInto = null;
     this.id = id;
+    this.new = true;
   }
 
   move(row, column) {
