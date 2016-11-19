@@ -41,8 +41,6 @@
           event.preventDefault();
           const direction = event.keyCode - 37;
           this.board.move(direction);
-          console.log(`this.score: ${this.score}`);
-          console.log(`this.board.score: ${this.board.score}`);
           if (this.board.score > this.score) {
             this.$store.commit({
               type: 'addScore',

@@ -1,14 +1,12 @@
 {
   "name": "vue-vuex-2048",
   "version": "1.0.0",
-  "description": "2048 with Vue.js and vuex",
+  "description": "2048 with Vue.js-2.0 and Vuex",
   "author": "xxhomey19 <xxhomey19@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "unit": "karma start test/unit/karma.conf.js --single-run",
-    "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
