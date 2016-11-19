@@ -18,9 +18,9 @@ class Board {
     this.tiles = [];
     this.cells = [];
     this.size = 4;
-    for (let i = 0; i < (this.size * this.size);) {
-      this.cells[(i / 4)] = [this.addTile(0, 0, 0, i), this.addTile(0, 0, 0, i + 1), this.addTile(0, 0, 0, i + 2), this.addTile(0, 0, 0, i + 3)]; // eslint-disable-line
-      i += 4;
+    this.id = 0;
+    for (let i = 0; i < this.size; i++) {
+      this.cells[i] = [this.addTile(0, 0, 0, this.id++), this.addTile(0, 0, 0, this.id++), this.addTile(0, 0, 0, this.id++), this.addTile(0, 0, 0, this.id++)]; // eslint-disable-line
     }
     for (let j = 0; j < 2; j++) {
       this.addRandomTile();
@@ -56,14 +56,14 @@ class Board {
 
   moveLeft() {
     let hasChanged = false;
-    for (let row = 0; row < this.size; ++row) {
+    for (let row = 0; row < this.size; row++) {
       const currentRow = this.cells[row].filter(tile => tile.value !== 0);
       let resultRow = [];
-      for (let target = 0; target < this.size; ++target) {
-        let targetTile = currentRow.length ? currentRow.shift() : this.addTile();
+      for (let target = 0; target < this.size; target++) {
+        let targetTile = currentRow.length ? currentRow.shift() : this.addTile(0, 0, 0, this.id++);
         if (currentRow.length > 0 && currentRow[0].value === targetTile.value) {
           let tile1 = targetTile;
-          targetTile = this.addTile(targetTile.value);
+          targetTile = this.addTile(targetTile.value, targetTile.row, targetTile.column, this.id++);
           tile1.mergedInto = targetTile;
           let tile2 = currentRow.shift();
           tile2.mergedInto = targetTile;
@@ -93,13 +93,14 @@ class Board {
 
   move(direction) {
     this.clearOldTiles();
-    for (let i = 0; i < direction; ++i) {
+    for (let i = 0; i < direction; i++) {
       this.cells = rotateLeft(this.cells);
     }
-    for (let i = direction; i < this.size; ++i) {
+    let hasChanged = this.moveLeft();
+    for (let i = direction; i < this.size; i++) {
       this.cells = rotateLeft(this.cells);
     }
-    if (this.moveLeft()) {
+    if (hasChanged) {
       this.addRandomTile();
     }
     this.setPositions();
@@ -119,8 +120,8 @@ class Board {
 
   hasLost() {
     let canMove = false;
-    for (let row = 0; row < this.size; ++row) {
-      for (let column = 0; column < this.size; ++column) {
+    for (let row = 0; row < this.size; row++) {
+      for (let column = 0; column < this.size; column++) {
         canMove |= (this.cells[row][column].value === 0);
         for (let dir = 0; dir < 4; ++dir) {
           const newRow = row + this.deltaX[dir];
