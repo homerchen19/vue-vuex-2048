@@ -5,12 +5,14 @@
       div(v-for="r_item in board.cells")
         cell(v-for="c_item in r_item")
       tile-view(v-for="tile in tiles" v-bind:tile="tile")
+      overlay(v-bind:board="board" v-bind:onrestart="onRestart")
 </template>
 
 <script>
   import Info from './Info';
   import Cell from './Cell';
   import TileView from './TileView';
+  import Overlay from './Overlay';
   import Board from '../utils/board';
 
   export default {
@@ -49,6 +51,7 @@
       Info,
       Cell,
       TileView,
+      Overlay,
     },
   };
 </script>
