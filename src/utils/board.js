@@ -138,6 +138,11 @@ class Board {
     }
     return !canMove;
   }
+
+  clean() {
+    this.setPositions(false);
+    this.tiles = [];
+  }
 }
 
 export default Board;
