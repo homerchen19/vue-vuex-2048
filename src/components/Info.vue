@@ -8,7 +8,7 @@
     div.sub-heading
       p.game-intro Join the numbers and get to the
         strong  2048 tile!
-      a.restart-button New Game
+      a.restart-button(v-on:click="onRestart") New Game
 </template>
 
 <script>
@@ -19,6 +19,11 @@ export default {
     },
     bestScore() {
       return this.$store.state.bestScore;
+    },
+  },
+  methods: {
+    onRestart() {
+      this.$store.commit('restart');
     },
   },
 };

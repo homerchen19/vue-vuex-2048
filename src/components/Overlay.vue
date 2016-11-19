@@ -1,37 +1,27 @@
 <template lang="pug">
   div.overlay(v-show="show")
     p.message {{contents}}
-    button.tryAgain-button(v-on:click="restart") Try again
+    button.tryAgain-button(v-on:click="onRestart") Try again
 </template>
 
 <script>
   export default {
-    props: {
-      board: {
-        type: Object,
-        required: true,
-      },
-      onrestart: {
-        type: Function,
-        required: true,
-      },
-    },
     computed: {
       show() {
-        return this.board.hasWon() || this.board.hasLost();
+        return this.$store.state.board.hasWon() || this.$store.state.board.hasLost();
       },
       contents() {
-        if (this.board.hasWon()) {
+        if (this.$store.state.board.hasWon()) {
           return 'Good Job!';
-        } else if (this.board.hasLost()) {
+        } else if (this.$store.state.board.hasLost()) {
           return 'Game Over';
         }
         return '';
       },
     },
     methods: {
-      restart() {
-        this.onrestart();
+      onRestart() {
+        this.$store.commit('restart');
       },
     },
   };

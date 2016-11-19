@@ -5,7 +5,7 @@
       div(v-for="r_item in board.cells")
         cell(v-for="c_item in r_item")
       tile-view(v-for="tile in tiles" v-bind:tile="tile")
-      overlay(v-bind:board="board" v-bind:onrestart="onRestart")
+      overlay
 </template>
 
 <script>
@@ -13,14 +13,8 @@
   import Cell from './Cell';
   import TileView from './TileView';
   import Overlay from './Overlay';
-  import Board from '../utils/board';
 
   export default {
-    data() {
-      return {
-        board: new Board(),
-      };
-    },
     created: function() { // eslint-disable-line
       window.addEventListener('keydown', this.handleKeyDown.bind(this)); // eslint-disable-line
     },
@@ -29,22 +23,22 @@
     },
     computed: {
       tiles() {
-        return this.board.tiles.filter(tile => tile.value !== 0);
+        return this.$store.state.board.tiles.filter(tile => tile.value !== 0);
+      },
+      board() {
+        return this.$store.state.board;
       },
     },
     methods: {
       handleKeyDown(event) {
-        if (this.board.hasWon()) {
+        if (this.$store.state.board.hasWon()) {
           return;
         }
         if (event.keyCode >= 37 && event.keyCode <= 40) {
           event.preventDefault();
           const direction = event.keyCode - 37;
-          this.board.move(direction);
+          this.$store.state.board.move(direction);
         }
-      },
-      onRestart() {
-        this.board = new Board();
       },
     },
     components: {
