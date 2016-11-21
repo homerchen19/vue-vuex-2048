@@ -55,9 +55,10 @@ export default {
     background: #bbada0;
     margin-top: 20px;
     margin-right: 0px;
-    padding: 15px 25px;
+    padding: 15px 0px;
     font-size: 25px;
     height: 30px;
+    width: 70px;
     line-height: 47px;
     font-weight: bold;
     border-radius: 3px;

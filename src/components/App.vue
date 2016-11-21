@@ -28,6 +28,9 @@
       score() {
         return this.$store.state.score;
       },
+      bestScore() {
+        return this.$store.state.bestScore;
+      },
       tiles() {
         return this.board.tiles.filter(tile => tile.value !== 0);
       },
@@ -44,8 +47,15 @@
           if (this.board.score > this.score) {
             this.$store.commit({
               type: 'addScore',
-              amount: this.board.score,
+              score: this.board.score,
             });
+          }
+          if (this.board.score > this.bestScore) {
+            this.$store.commit({
+              type: 'setBestScore',
+              score: this.board.score,
+            });
+            this.$cookie.set('bestScore', this.board.score, 30);
           }
         }
       },

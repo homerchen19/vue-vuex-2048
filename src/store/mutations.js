@@ -9,7 +9,10 @@ const mutations = {
     });
   },
   addScore(state, payload) {
-    state.score = payload.amount;
+    state.score = payload.score;
+  },
+  setBestScore(state, payload) {
+    state.bestScore = payload.score;
   },
 };
 
