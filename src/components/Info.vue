@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import delay from 'delay';
+
 export default {
   computed: {
     score() {
@@ -26,10 +28,35 @@ export default {
       this.$store.commit('restart');
     },
   },
+  watch: {
+    score(val, oldVal) {
+      const scoreContainer = document.getElementsByClassName('score-container')[0]; // eslint-disable-line
+      const addition = document.createElement("div"); // eslint-disable-line
+      addition.classList.add('score-addition');
+      addition.textContent = `+${(val - oldVal)}`;
+      scoreContainer.appendChild(addition);
+      delay(600).then(() => {
+        const additionDom = document.getElementsByClassName('score-addition')[0]; // eslint-disable-line
+        scoreContainer.removeChild(additionDom);
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scope>
+  @keyframes move-up {
+    0% {
+      top: 25px;
+      opacity: 1;
+    }
+
+    100% {
+      top: -50px;
+      opacity: 0;
+    }
+  }
+
   .info {
     position: relative;
     top: -20px;
@@ -79,6 +106,19 @@ export default {
       line-height: 13px;
       text-align: center;
       color: #eee4da;
+    }
+
+    .score-addition {
+      position: absolute;
+      right: 30px;
+      color: red;
+      font-size: 25px;
+      line-height: 25px;
+      font-weight: bold;
+      color: rgba(119, 110, 101, 0.9);
+      z-index: 100;
+      animation: move-up 600ms ease-in;
+      animation-fill-mode: both;
     }
   }
   .score-container:after {

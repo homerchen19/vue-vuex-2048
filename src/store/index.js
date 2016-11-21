@@ -7,7 +7,6 @@ import mutations from './mutations';
 Vue.use(Vuex);
 Vue.use(VueCookie);
 
-console.log(Vue.cookie.get('bestScore'));
 let bestScore = Vue.cookie.get('bestScore') ? Vue.cookie.get('bestScore') : 0;
 
 const state = {
