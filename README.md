@@ -3,9 +3,9 @@
 > 2048 Game with **Vue.js-2.0** and **Vuex**
 
 ##
-Initailly built by [vue-cli][1]
-Written in [Vuex][2], [ES6][3], [pug][4]
-**[Demo Page][0]**
+Initailly built by [vue-cli][1]  
+Written in [Vuex][2], [ES6][3], [pug][4]  
+**[Demo Page][0]**  
 
 ## Build Setup
 
